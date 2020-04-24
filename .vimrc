@@ -1,6 +1,8 @@
-execute pathogen#infect()
-
 call plug#begin('~/.vim/plugged')
+
+Plug 'dracula/vim', { 'as': 'dr:acula' }
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'fatih/vim-go'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -18,7 +20,7 @@ endif
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'pangloss/vim-javascript'
-Plug 'valloric/youcompleteme'
+" Plug 'valloric/youcompleteme'
 Plug 'othree/html5.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'moll/vim-node'
@@ -29,32 +31,28 @@ Plug 'hzchirs/vim-material'
 Plug 'ryanoasis/vim-devicons'
 Plug 'jdkanani/vim-material-theme'
 Plug 'gorodinskiy/vim-coloresque'
-Plug 'nsf/gocode', {'rtp': 'vim/'}
-call plug#end() 
+call plug#end()
 
 syntax on
-" no vi-compatible
+color dracula
 set nocompatible
 set encoding=utf-8
-
-colorscheme codedark
-let g:airline_theme = 'codedark'
-filetype plugin on
-
-set bs=2 " 在 insert 模式下用退後鍵刪除
+set bs=2
 set ruler
 set t_Co=256
-" always show status bar
 set ls=2
 set nu
 set splitbelow
 set splitright
-
 set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-
+" set relativenumber
+set incsearch
+set showcmd
+set showmatch
+set rtp+=/usr/local/opt/fzf
 set backspace=indent,eol,start
 set mouse=a
 set clipboard=unnamed
@@ -82,16 +80,6 @@ autocmd FileType htmldjango setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType javascript setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
 let g:go_fmt_command = "goimports"
-" enable powerline-fonts
-let g:airline_powerline_fonts = 1
-" enable tabline
-let g:airline#extensions#tabline#enabled = 1
-" set left separator
-let g:airline#extensions#tabline#left_sep = ' '
-" set left separator which are not editting
-let g:airline#extensions#tabline#left_alt_sep = '|'
-" show buffer number
-let g:airline#extensions#tabline#buffer_nr_show = 1
 
 map <C-n> :NERDTreeToggle<CR>
 " tmux navigator
@@ -147,13 +135,42 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 
-" loading the plugin
-" let g:webdevicons_enable = 1
-" adding the flags to NERDTree 
-" let g:webdevicons_enable_nerdtree = 1
-" adding to vim-airline's tabline
-" let g:webdevicons_enable_airline_tabline = 1
-" adding to vim-airline's statusline
-" let g:webdevicons_enable_airline_statusline = 1
-" change the default character when no match found
-" let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = 'ƛ'
+" Powerline
+" set laststatus=2
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline_theme = 'papercolor'
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
